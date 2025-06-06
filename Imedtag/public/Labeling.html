@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Workspace</title>
+    <link rel = "stylesheet" href="Labeling.css">
+</head>
+<body>
+    <button id="backButton" class="back-btn">⬅ Back</button>
+    <div class="header">
+        <div class="project-name" id="projectName">Loading...</div>
+    </div>
+
+    <div class="left-sidebar">
+        <a href="#" id="menu-upload">📤 Upload Images</a>
+        <a href="#" id="menu-dataset">📂 Dataset</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        <div class="left-panel">
+            <h2 id="labelingTitle" style="color: white; margin-bottom: 15px;">Labeling</h2>
+        
+
+            <button class="start-labeling-btn" id="startLabelingBtn">Start Labeling</button>
+            <button id="sentToDataset" style="display: none;" class="start-labeling-btn">Sent to Dataset</button>
+
+            <div class="label-buttons">
+                <button id="allLabeling">All</button>
+                <button id="notLabeling" class="active">Not Labeled</button>
+                <button id="alreadyLabeling">Already Labeled</button>
+            </div>
+
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+            
+            <div class="image-preview" id="imagePreview"></div>
+        </div>
+
+        <div class="right-panel">
+            <h3><strong>Progress</strong></h3>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <p id="imageCount">0 Images</p>
+            <p id="labelCount">0 Labeled</p>
+            <p id="nonLabelCount">0 Non-Labeled</p>
+            
+            <h3><strong>Creator</strong></h3>
+            <p id="creatorName">Loading...</p>
+        
+        </div>
+    </div>
+    <script src = "Labeling.js"></script>
+</body>
+</html>
