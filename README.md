@@ -10,7 +10,7 @@
 **อาจารย์ที่ปรึกษาโครงงาน:** รศ.ดร.ธนาธร ทะนานทอง
 
 **ผู้จัดทำโครงงาน:** 
-1. นายกันตพล แท่นประทุม  
+1. นายกันตพล แท่นประทุม  6209610010  kantapol.tha@dome.tu.ac.th 
 2. นางสาวกานชญา นิลพันธุ์  6209610135  kunchaya.nil@tu.ac.th
    
 Manual / Instructions for your projects starts here !
