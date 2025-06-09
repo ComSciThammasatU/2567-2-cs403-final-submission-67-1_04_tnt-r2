@@ -20,6 +20,7 @@
 # ชุดโปรแกรมที่จำเป็น
 1. [node js](https://nodejs.org/en).
 2. [MySQL](https://dev.mysql.com/downloads/installer/).
+3. Visual Studio Code (VS Code) ([https://dev.mysql.com/downloads/installer/](https://code.visualstudio.com/)).
    
 # การติดตั้ง
 
