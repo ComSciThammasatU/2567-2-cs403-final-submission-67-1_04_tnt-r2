@@ -14,7 +14,13 @@
 2. นางสาวกานชญา นิลพันธุ์  6209610135  kunchaya.nil@tu.ac.th
    
 # โครงสร้างไฟล์ของระบบ
+
 # ขั้นตอนการโหลดไฟล์
+
 # ชุดโปรแกรมที่จำเป็น
+1. [node js](https://nodejs.org/en).
+2. [MySQL](https://dev.mysql.com/downloads/installer/).
+   
 # การติดตั้ง
+
 # การใช้งาน
