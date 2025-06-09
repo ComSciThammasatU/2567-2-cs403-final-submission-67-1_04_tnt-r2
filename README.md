@@ -18,9 +18,15 @@
 # ขั้นตอนการโหลดไฟล์
 
 # ชุดโปรแกรมที่จำเป็น
+
 1. [node js](https://nodejs.org/en).
+   ทำหน้าที่เป็น เซิร์ฟเวอร์ฝั่ง Backend สำหรับโปรแกรม Labeling โดยรับผิดชอบในการจัดการคำขอ (request) จากฝั่งผู้ใช้
+
 2. [MySQL](https://dev.mysql.com/downloads/installer/).
+   เป็นตัวจัดการฐานข้อมูลหลักของโปรแกรม
+
 3. [Visual Studio Code](https://code.visualstudio.com/).
+   โปรแกรมสำหรับการจัดการโค้ด
    
 # การติดตั้ง
 
