@@ -1,0 +1,18 @@
+การพัฒนาโปรแกรมสร้างผลเฉลยข้อมูลสำหรับฝึกสอนโมเดลปัญญาประดิษฐ์ทางการแพทย์
+Development of a Data Labeling Program for Training Medical AI Models
+
+In today's world, where artificial intelligence (AI) plays a significant role in every 
+society to assist and advance various fields, including medical, the accuracy of AI heavily 
+depends on the precision and volume of annotated data. The project team aims to support 
+and develop a program for data labeling, especially for medical.
+
+Given the wide variety of data label programs, six programs were selected for 
+comparison: CVAT, ImageTagger, VoTT, LabelMe, Label Studio, and  Roboflow. Additionally, the 
+study explored challenges related to medical data collection.
+
+It was found that these six programs share both similarities and differences in their 
+functionalities, including the types of annotations (e.g., bounding boxes and segmentation) and 
+file export formats suitable for further use. Some programs incorporate AI to assist in predicting.
+
+We need to select functionalities that are most suitable for creating medical data labeling. 
+These labels can then be used to develop models for AI applications in the medical field. 
