@@ -33,4 +33,28 @@
    
 # การติดตั้ง
 
+1. ผู้ใช้จำเป็นจะต้องติดตั้ง node.js, Mysql, และ Visual Studio Code
+2. สร้าง folder สำหรับการใส่โปรเจค
+   
+   ```
+   mkdir (Whatever you want to name your folder)
+   cd (your folder's name)
+   mkdir uploads
+   mkdir public
+   npm init -y
+   ```
+   
+3. จากนั้นจึงทำการ install library ที่จำเป็น
+   
+   ```
+   npm install mysql2
+   npm install cors
+   npm install bcryptjs jsonwebtoken
+   npm install express multer cors
+   npm install express multer mysql2 cors
+   npm install archiver
+   npm install sharp
+   ```
+4. ไฟล์ที่ดาวโหลดผู้ใช้สามารถเลือกวางตามลำดับโครงสน้างไฟล์ของระบบ
+
 # การใช้งาน
