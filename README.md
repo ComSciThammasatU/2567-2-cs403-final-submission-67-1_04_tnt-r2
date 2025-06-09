@@ -13,7 +13,8 @@
 1. นายกันตพล แท่นประทุม  6209610010  kantapol.tha@dome.tu.ac.th 
 2. นางสาวกานชญา นิลพันธุ์  6209610135  kunchaya.nil@tu.ac.th
    
-Manual / Instructions for your projects starts here !
-# Topic 1
-# Topic 2 
-# Topic 3
+# โครงสร้างไฟล์ของระบบ
+# ขั้นตอนการโหลดไฟล์
+# ชุดโปรแกรมที่จำเป็น
+# การติดตั้ง
+# การใช้งาน
