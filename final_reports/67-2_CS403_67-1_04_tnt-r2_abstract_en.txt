@@ -16,3 +16,5 @@ file export formats suitable for further use. Some programs incorporate AI to as
 
 We need to select functionalities that are most suitable for creating medical data labeling. 
 These labels can then be used to develop models for AI applications in the medical field. 
+
+Keywords: Data Labeling, Medical Data, Medical Labeling
