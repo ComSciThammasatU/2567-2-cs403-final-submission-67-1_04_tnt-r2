@@ -15,15 +15,15 @@
    
 # โครงสร้างไฟล์ของระบบ
 
-Project/
-|-- public/
-|   |-- xxxxx.css
-|   |-- xxxxx.html
-|   |-- xxxxx.js
-|-- upload/
-|-- package.json
-|-- package-lock.json
-|-- server.js
+- Project/
+  - public/
+    - xxxxx.css
+    - xxxxx.html
+    - xxxxx.js
+  - upload/
+  - package.json
+  - package-lock.json
+  - server.js
 
 
 # ขั้นตอนการโหลดไฟล์
