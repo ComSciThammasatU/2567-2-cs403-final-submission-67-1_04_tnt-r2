@@ -15,6 +15,17 @@
    
 # โครงสร้างไฟล์ของระบบ
 
+Project/
+|-- public/
+|   |-- xxxxx.css
+|   |-- xxxxx.html
+|   |-- xxxxx.js
+|-- upload/
+|-- package.json
+|-- package-lock.json
+|-- server.js
+
+
 # ขั้นตอนการโหลดไฟล์
 
 # ชุดโปรแกรมที่จำเป็น
