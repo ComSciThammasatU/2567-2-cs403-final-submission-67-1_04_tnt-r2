@@ -72,11 +72,11 @@
 
    4.1 public/ เป็น folder สำหรับเก็บไฟล์ฝั่ง Frontend ที่ใช้แสดงผลบนเว็บเบราว์เซอร์ซึ่งมี
    
-            4.1.1 ไฟล์ CSS(.css)
+      4.1.1 ไฟล์ CSS(.css)
    
-            4.1.1 ไฟล์ HTML(.html)
+      4.1.2 ไฟล์ HTML(.html)
    
-            4.1.1 ไฟล์ JavaScript(.js)
+      4.1.3 ไฟล์ JavaScript(.js)
 
    4.2 upload/ เป็น folder สำหรับเก็บรูปภาพที่ผู้ใช้อัปโหลดในเว็บเบราว์เซอร์
 
@@ -88,7 +88,7 @@
 
    4.6 package-lock.json
 
-6. นำเข้าไฟล์ database.sql ใน mysql work bench ที่เชื่อมต่อกับโปรเจค
+5. นำเข้าไฟล์ database.sql ใน mysql work bench ที่เชื่อมต่อกับโปรเจค
 
     ขั้นตอนการนำเข้าไฟล์
    
@@ -104,7 +104,7 @@
    
       5.6 กดปุ่ม สายฟ้า (⚡️) หรือปุ่ม Ctrl + Shift + Enter เพื่อทำการรัน
    
-7. ดำเนินการรันคำสั่งใน Terminal
+6. ดำเนินการรันคำสั่งใน Terminal
     ```
     node server.js
     ```
