@@ -32,11 +32,11 @@
 ผู้ใช้สามารถเลือกกดปุ่ม ![image](https://github.com/user-attachments/assets/76ed8aea-848b-42a9-b728-b5f89e306591)
  หน้าgithup ของโปรเจคเพื่อจะ
 
-วิธีที่ 1 Download Zip
+**วิธีที่ 1 Download Zip**
 1. ผู้ใช้สามารถแตกไฟล์ .zip ที่ดาวโหลดได้
 2. เปิดโฟลเดอร์ใน Visual studio code เพื่อดูโค้ด
 
-วิธีที่ 2 Clone using the web URL
+**วิธีที่ 2 Clone using the web URL**
 1. ผู้ใช้ใช้คำสั่งใน git brush
    ```
    git clone https://github.com/ComSciThammasatU/2567-2-cs403-final-submission-67-1_04_tnt-r2.git
