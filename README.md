@@ -66,7 +66,7 @@
    npm install archiver
    npm install sharp
    ```
-4. ไฟล์ที่ดาวโหลดผู้ใช้สามารถเลือกวางตามลำดับโครงสร้างไฟล์ของระบบ
+4. ไฟล์ที่ดาวน์โหลดผู้ใช้สามารถเลือกวางตามลำดับโครงสร้างไฟล์ของระบบ
    
    หลังจากที่ทำการ install library ที่จำเป็นทั้งหมดแล้ว folder ที่เก็บโปรเจคต้องประกอบไปด้วย
 
@@ -82,13 +82,15 @@
 
    4.3 node modules/ เป็น folder สำหรับเก็บ Library ที่ผู้ใช้ได้ทำการติดตั้งในขั้นตอนที่ 3
 
-   4.4 server.js
+   4.4 server.js ผู้ใช้ต้องแก้ไข Password ในไฟล์ JavaScript ให้ตรงกับ Password ที่ผู้ใช้ได้ตั้งเอาไว้ในขั้นตอนที่ติดตั้ง MySQL
+
+         password: process.env.DB_PASSWORD || "(MySQL's password)",
 
    4.5 package.json
 
    4.6 package-lock.json
 
-5. นำเข้าไฟล์ database.sql ใน mysql work bench ที่เชื่อมต่อกับโปรเจค
+6. นำเข้าไฟล์ database.sql ใน mysql work bench ที่เชื่อมต่อกับโปรเจค
 
     ขั้นตอนการนำเข้าไฟล์
    
@@ -104,7 +106,7 @@
    
       5.6 กดปุ่ม สายฟ้า (⚡️) หรือปุ่ม Ctrl + Shift + Enter เพื่อทำการรัน
    
-6. ดำเนินการรันคำสั่งใน Terminal
+7. ดำเนินการรันคำสั่งใน Terminal
     ```
     node server.js
     ```
