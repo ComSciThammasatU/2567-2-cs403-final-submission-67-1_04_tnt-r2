@@ -1,6 +1,7 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/w8H8oomW)
 **<ins>Note</ins>: Students must update this `README.md` file to be an installation manual or a README file for their own CS403 projects.**
 
+
 **รหัสโครงงาน:** 67-1_04_tnt-r2
 
 **ชื่อโครงงาน (ไทย):** การพัฒนาโปรแกรมสร้างผลเฉลยข้อมูลสำหรับฝึกสอนโมเดลปัญญาประดิษฐ์ทางการแพทย์
@@ -27,6 +28,18 @@
 
 
 # ขั้นตอนการโหลดไฟล์
+ผู้ใช้สามารถเลือกกดปุ่ม <>code หน้าgithup ของโปรเจคเพื่อจะ
+
+วิธีที่ 1 Download Zip
+1. ผู้ใช้สามารถแตกไฟล์ .zip ที่ดาวโหลดได้
+2. เปิดโฟลเดอร์ใน Visual studio code เพื่อดูโค้ด
+
+วิธีที่ 2 Clone using the web URL
+1. ผู้ใช้ใช้คำสั่งใน git brush
+   ```
+   git clone https://github.com/ComSciThammasatU/2567-2-cs403-final-submission-67-1_04_tnt-r2.git
+   ```
+2. เปิด folder project 
 
 # ชุดโปรแกรมที่จำเป็น
 
