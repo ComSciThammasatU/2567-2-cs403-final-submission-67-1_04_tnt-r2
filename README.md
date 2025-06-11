@@ -83,8 +83,10 @@
    4.3 node modules/ เป็น folder สำหรับเก็บ Library ที่ผู้ใช้ได้ทำการติดตั้งในขั้นตอนที่ 3
 
    4.4 server.js ผู้ใช้ต้องแก้ไข Password ในไฟล์ JavaScript ให้ตรงกับ Password ที่ผู้ใช้ได้ตั้งเอาไว้ในขั้นตอนที่ติดตั้ง MySQL
-
+   ```
          password: process.env.DB_PASSWORD || "(MySQL's password)",
+         database: process.env.DB_NAME || " (MySQL's name)"
+   ```
 
    4.5 package.json
 
