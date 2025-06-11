@@ -82,9 +82,9 @@
 
    4.3 node modules/ เป็น folder สำหรับเก็บ Library ที่ผู้ใช้ได้ทำการติดตั้งในขั้นตอนที่ 3
 
-   4.4 ไฟล์ server.js
+   4.4 server.js
 
-   4.5 ไฟล์ package.json
+   4.5 package.json
 
    4.6 package-lock.json
 
