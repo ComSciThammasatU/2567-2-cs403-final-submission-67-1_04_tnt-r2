@@ -70,13 +70,18 @@
 5. นำเข้าไฟล์ database.sql ใน mysql work bench ที่เชื่อมต่อกับโปรเจค
    ขั้นตอนการนำเข้าไฟล์
       5.1 เปิด MySQL Workbench
+   
       5.2 เลือก Local instance MySQL80
+   
       5.3 ใส่ Password ที่ได้ตั้งเอาไว้ในขั้นตอนที่ติดตั้ง MySQL
+   
       5.4 เลือก File -> Open SQL Script…
+   
       5.5 เลือกไฟล์ database.sql จากนั้นจะมีสคริปต์ SQL ปรากฏ
+   
       5.6 กดปุ่ม สายฟ้า (⚡️) หรือปุ่ม Ctrl + Shift + Enter เพื่อทำการรัน
    
-6. ดำเนินการรันคำสั่งใน Terminal
+7. ดำเนินการรันคำสั่งใน Terminal
     ```
     node server.js
     ```
