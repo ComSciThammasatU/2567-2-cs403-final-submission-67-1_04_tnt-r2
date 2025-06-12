@@ -305,6 +305,7 @@
         });
     }
 
+    // Save annotation to database
     async function saveAnnotation(rect) {
         if (!currentImageId || !rect) return;
             try {
@@ -345,7 +346,7 @@
         }
     }        
 
-    // Save annotation to database
+    // load annotation from database
     async function loadAnnotations(imageId) {
         try {
             const response = await fetch(`${serverUrl}/api/images/${imageId}/annotations`, {
