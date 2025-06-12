@@ -26,6 +26,7 @@
   - package.json
   - package-lock.json
   - server.js
+  - database.sql
 
 
 # ขั้นตอนการโหลดไฟล์
