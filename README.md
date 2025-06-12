@@ -112,7 +112,7 @@
    
       5.2 เลือก Local instance MySQL80
    
-      5.3 ใส่ Password ที่ได้ตั้งเอาไว้ในขั้นตอนที่ติดตั้ง MySQL
+      5.3 ใส่ Root Password ที่ได้ตั้งเอาไว้ในขั้นตอนที่ติดตั้ง MySQL
    
       5.4 เลือก File -> Open SQL Script…
    
