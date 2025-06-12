@@ -18,6 +18,7 @@ let selectedType = "Object Detection";
 
                 // Hide all sections
                 containers.forEach(container => container.classList.remove("active"));
+                
                 // Show the selected section
                 const targetId = this.getAttribute("data-target");
                 document.getElementById(targetId).classList.add("active");
@@ -38,6 +39,7 @@ let selectedType = "Object Detection";
     });
 
     document.addEventListener("DOMContentLoaded", function () {
+    
     // Sign out from popup (top-right)
     const signOutBtn = document.getElementById("signOutBtn");
     if (signOutBtn) {
@@ -58,10 +60,12 @@ let selectedType = "Object Detection";
     }
     });
 
+    // Get project ID from URL 
     function getProjectIdFromUrl() {
         return new URLSearchParams(window.location.search).get("id");
     }
-  
+
+    //User Token
     function jwt_decode(token) {
         try {
         const base64Url = token.split(".")[1];
@@ -84,7 +88,7 @@ let selectedType = "Object Detection";
         loadUserInfo()
         loadProjects();
         
-        // Better event delegation for delete buttons
+        // delete buttons
         document.getElementById("projectContainer").addEventListener("click", function(event) {
             if (event.target.classList.contains("delete-btn")) {
                 const projectId = event.target.getAttribute("data-id");
