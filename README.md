@@ -52,7 +52,7 @@
 
 2. [MySQL](https://dev.mysql.com/downloads/installer/).
    
-   เป็นตัวจัดการฐานข้อมูลหลักของโปรแกรม โดยผู้ใช้จำเป็นต้องดาวน์โหลด MySQL Server และ MySQL Workbecnh หลังจากติดตั้งเสร็จผู้ใช้ควรจดจำ root password ที่ตั้งไว้ให้ดีเพราะจำเป็นต้องใช้ในการเชื่อมต่อฐานข้อมูล
+   เป็นตัวจัดการฐานข้อมูลหลักของโปรแกรม โดยผู้ใช้จำเป็นต้องดาวน์โหลด MySQL Server และ MySQL Workbecnh หลังจากติดตั้งเสร็จผู้ใช้ควรจดจำ Root Password ที่ตั้งไว้ให้ดีเพราะจำเป็นต้องใช้ในการเชื่อมต่อฐานข้อมูล
 
 3. [Visual Studio Code](https://code.visualstudio.com/).
    
@@ -93,9 +93,9 @@
 
    4.3 node modules/ เป็น folder สำหรับเก็บ Library ที่ผู้ใช้ได้ทำการติดตั้งในขั้นตอนที่ 3
 
-   4.4 server.js ผู้ใช้ต้องแก้ไข Password ในไฟล์ JavaScript ให้ตรงกับ Password ที่ผู้ใช้ได้ตั้งเอาไว้ในขั้นตอนที่ติดตั้ง MySQL
+   4.4 server.js ผู้ใช้ต้องแก้ไข Password ในไฟล์ JavaScript ให้ตรงกับ Root Password ที่ผู้ใช้ได้ตั้งเอาไว้ในขั้นตอนที่ติดตั้ง MySQL
    ```
-         password: process.env.DB_PASSWORD || "(MySQL's password)",
+         password: process.env.DB_PASSWORD || "(MySQL's Root Password)",
    ```
 
    4.5 package.json
