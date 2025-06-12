@@ -14,6 +14,7 @@
   const app = express();
   const port = 5000;
 
+  // Enable CORS
   app.use(cors({
     origin: true, 
     credentials: true,
@@ -21,9 +22,12 @@
     allowedHeaders: ['Content-Type', 'Authorization']
   }));
 
+  // Body parser setup
   app.use(express.json({ limit: '100mb' }));
   app.use(express.urlencoded({ limit: '100mb', extended: true }));
   app.use(express.static("public"));
+
+  // Serve uploaded files
   const uploadsPath = path.join(__dirname, "uploads");
   app.use("/uploads", express.static(uploadsPath, {
     setHeaders: (res, path) => {
@@ -32,16 +36,18 @@
     }
   }));
 
+  // MySQL connection pool
   const pool = mysql.createPool({
     host: process.env.DB_HOST || "localhost",
     user: process.env.DB_USER || "root",
-    password: process.env.DB_PASSWORD || " ", //your password
-    database: process.env.DB_NAME || "Imedtag", //your db name
+    password: process.env.DB_PASSWORD || "Missmukuro021",
+    database: process.env.DB_NAME || "Imedtag",
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
   });
 
+  // Test MySQL connection
   async function testConnection() {
     let connection;
     try {
@@ -57,11 +63,13 @@
 
   testConnection();
 
+  // Ensure upload directory exists
   const uploadDir = "uploads";
   if (!fs.existsSync(uploadDir)) {
     fs.mkdirSync(uploadDir);
   }
 
+  // Multer storage setup
   const storage = multer.diskStorage({
     destination: (req, file, cb) => {
       cb(null, "uploads/");
@@ -86,11 +94,13 @@
     }
   });
 
+  // Log all requests
   app.use((req, res, next) => {
     console.log(`${req.method} ${req.url}`);
     next();
   });
 
+  // Global error handler
   app.use((err, req, res, next) => {
     console.error('Server error:', err);
     res.status(500).json({ 
@@ -101,6 +111,7 @@
     });
   });
 
+  // User signup API
   app.post("/api/signup", async (req, res) => {
     const { name, email, password } = req.body;
 
@@ -125,6 +136,7 @@
     }
   });
 
+  // User login API
   app.post("/api/login", async (req, res) => {
     const { email, password } = req.body;
 
@@ -153,6 +165,7 @@
     }
   });
 
+  // Get current authenticated user info
   app.get('/api/user', authenticateToken, async (req, res) => {
       try {
           const [rows] = await pool.query(
@@ -170,6 +183,7 @@
       }
   });
 
+  // Get specific user by ID
   app.get("/api/user/:id", authenticateToken, async (req, res) => {
     try {
         const [rows] = await pool.query('SELECT user_id, name, email FROM User WHERE user_id = ?', [req.params.id]);
@@ -183,6 +197,8 @@
       }
   });
 
+  // Project Routes
+  // Get all projects of the authenticated user
   app.get("/api/projects", authenticateToken, async (req, res) => {
     try {
       const userId = req.user.userId;
@@ -206,6 +222,7 @@
     }
   });
 
+  // Get specific project by ID
   app.get("/api/projects/:id", authenticateToken, async (req, res) => {
     try {
       const projectId = req.params.id;
@@ -227,7 +244,7 @@
     }
   });
 
-
+  // Create new project
   app.post("/projects", async (req, res) => {
     const { user_id, project_name, tag, type, labeled_status } = req.body;
 
@@ -249,6 +266,7 @@
     }
   });
 
+  // Toggle project favorite status
   app.patch('/api/projects/:projectId/favorite', authenticateToken, async (req, res) => {
     const { projectId } = req.params;
     const userId = req.user.userId;
@@ -276,7 +294,7 @@
     }
   });
 
-
+  // Delete a project and all related data
   app.delete("/api/projects/:id", authenticateToken, async (req, res) => {
     const projectId = req.params.id;
     const userId = req.user.userId;
@@ -286,6 +304,7 @@
       connection = await pool.getConnection();
       await connection.beginTransaction();
 
+      // Check if project exists and belongs to user
       const [project] = await connection.query(
         `SELECT * FROM Project WHERE project_id = ? AND user_id = ?`,
         [projectId, userId]
@@ -294,6 +313,7 @@
         return res.status(404).json({ error: "Project not found or unauthorized" });
       }
 
+      // Get images in the project
       const [images] = await connection.query(
         `SELECT i.image_id, i.image_name FROM Image i
         JOIN ProjectImage pi ON i.image_id = pi.image_id
@@ -302,6 +322,7 @@
       );
       const imageIds = images.map(img => img.image_id);
 
+      // Delete annotations linked to these images
       if (imageIds.length > 0) {
         await connection.query(`
           DELETE a FROM Annotation a
@@ -311,13 +332,13 @@
         await connection.query(`DELETE FROM ImageLabel WHERE image_id IN (?)`, [imageIds]);
       }
 
+      // Delete labels and project-image associations
       await connection.query(`DELETE FROM Label WHERE project_id = ?`, [projectId]);
-
       await connection.query(`DELETE FROM ProjectImage WHERE project_id = ?`, [projectId]);
 
+      // Delete images and remove physical files
       if (imageIds.length > 0) {
         await connection.query(`DELETE FROM Image WHERE image_id IN (?)`, [imageIds]);
-
         for (const img of images) {
           const filePath = path.join(__dirname, 'uploads', img.image_name);
           if (fs.existsSync(filePath)) {
@@ -326,6 +347,7 @@
         }
       }
 
+      // Delete project
       await connection.query(`DELETE FROM Project WHERE project_id = ?`, [projectId]);
 
       await connection.commit();
@@ -340,6 +362,7 @@
     }
   });
 
+  // Get all images for a specific project
   app.get("/api/projects/:id/images", authenticateToken, async (req, res) => {
     try {
       const [images] = await pool.query(
@@ -358,6 +381,7 @@
   }
   });
 
+  // Image Routes
   app.get("/api/images/:projectId", authenticateToken, async (req, res) => {
     try {
       const [rows] = await pool.query(
@@ -375,6 +399,7 @@
     }
   });
 
+  //upload image
   app.post('/api/images/upload/:projectId', authenticateToken, upload.array('images'), async (req, res) => {
     const projectId = req.params.projectId;
     const userId = req.user?.userId;
@@ -397,10 +422,12 @@
       for (const file of req.files) {
         const tempPath = path.join(__dirname, 'uploads', file.filename);
 
+        // Get dimensions
         const metadata = await sharp(tempPath).metadata();
         const width = metadata.width || 0;
         const height = metadata.height || 0;
 
+        // Insert into DB to get image_id first
         const [imageResult] = await connection.query(
           `INSERT INTO Image (user_id, image_name, file_path, labeled_status, width, height)
           VALUES (?, ?, ?, 0, ?, ?)`,
@@ -411,13 +438,16 @@
         const newFilename = `image_${imageId}${path.extname(file.originalname)}`;
         const newFilePath = path.join(__dirname, 'uploads', newFilename);
 
+        // Rename the file
         fs.renameSync(tempPath, newFilePath);
 
+        // Update record with real filename and file_path
         await connection.query(
           `UPDATE Image SET image_name = ?, file_path = ? WHERE image_id = ?`,
           [newFilename, `/uploads/${newFilename}`, imageId]
         );
 
+        // Link to project
         await connection.query(
           `INSERT INTO ProjectImage (project_id, image_id)
           VALUES (?, ?)`,
@@ -444,11 +474,13 @@
     }
   });
 
+  //delete image
   app.delete("/images/:imageId", authenticateToken, async (req, res) => {
     const imageId = req.params.imageId;
     const userId = req.user.userId;
 
     try {
+      // Check if the image belongs to the user
       const [image] = await pool.query(
         `SELECT i.image_name FROM Image i
         JOIN ProjectImage pi ON i.image_id = pi.image_id
@@ -461,8 +493,10 @@
         return res.status(403).json({ message: "Not authorized to delete this image" });
       }
 
+      // Delete from DB
       await pool.query("DELETE FROM Image WHERE image_id = ?", [imageId]);
 
+      // Delete file - using the stored filename
       const filePath = path.join(__dirname, "uploads", image[0].image_name);
       if (fs.existsSync(filePath)) {
         fs.unlinkSync(filePath);
@@ -475,6 +509,7 @@
     }
   });
 
+  // keep token for login user
   function authenticateToken(req, res, next) {
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
@@ -492,6 +527,7 @@
     });
   }
 
+  //error message
   function handleDbError(res, error, action) {
     console.error(`Error ${action}:`, error);
     res.status(500).json({ 
@@ -500,6 +536,7 @@
     });
   }
 
+  // Get project images
   app.get("/api/projects/:id/images", authenticateToken, async (req, res) => {
     try {
         const [images] = await pool.query(
@@ -518,6 +555,7 @@
     }
   });
 
+  // Get single image
   app.get('/api/images/:id', authenticateToken, async (req, res) => {
     try {
       const [rows] = await pool.query(
@@ -540,6 +578,7 @@
     }
   });
 
+  // Get image annotations
   app.get('/api/images/:imageId/annotations', authenticateToken, async (req, res) => {
     const imageId = req.params.imageId;
 
@@ -560,6 +599,7 @@
     }
   });
 
+  // Save annotation
   app.post("/api/annotations", authenticateToken, async (req, res) => {
     try {
       const { image_id, label_id, x_min, x_max, y_min, y_max } = req.body;
@@ -594,6 +634,7 @@
         [imagelabel_id, x_min, x_max, y_min, y_max]
       );
 
+      //count image as labeled
       await pool.query(
         `UPDATE Image SET labeled_status = 1 WHERE image_id = ?`,
         [image_id]
@@ -613,6 +654,7 @@
     }
   });
 
+  // Label CRUD endpoints
   app.post("/api/labels", authenticateToken, async (req, res) => {
     try {
         const { project_id, label_name, label_color, label_category } = req.body;
@@ -643,8 +685,10 @@
     }
   });
 
+  // Labeling Routes
   app.get("/api/projects/:projectId/labels", authenticateToken, async (req, res) => {
     try {
+      // Verify project belongs to user
       const [project] = await pool.query(
         "SELECT * FROM Project WHERE project_id = ? AND user_id = ?", 
         [req.params.projectId, req.user.userId]
@@ -666,10 +710,12 @@
     }
   });
 
+  //export image
   app.get('/api/projects/:projectId/export/raw', authenticateToken, async (req, res) => {
     const projectId = req.params.projectId;
 
     try {
+      // Get all images for this project
       const [images] = await pool.query(`
         SELECT i.image_name FROM Image i
         JOIN ProjectImage pi ON i.image_id = pi.image_id
@@ -697,10 +743,12 @@
     }
   });
 
+  //export coco file
   app.get('/api/projects/:projectId/export/coco', authenticateToken, async (req, res) => {
     const projectId = req.params.projectId;
 
     try {
+       // Load images with size
       const [images] = await pool.query(`
         SELECT i.image_id, i.image_name, i.file_path, i.width, i.height
         FROM Image i
@@ -711,6 +759,7 @@
         return res.status(404).json({ error: 'No images for COCO export.' });
       }
 
+      // Load annotations
       const [annotations] = await pool.query(`
         SELECT 
           a.annotation_id, a.x_min, a.y_min, a.x_max, a.y_max,
@@ -731,6 +780,7 @@
         });
       });
 
+      // Build categories
       const categoriesMap = new Map();
       let categoryId = 1;
       const categories = [];
@@ -783,6 +833,7 @@
     }
   });
 
+  // Get annotations for a specific image
   app.get("/api/images/:imageId/annotations", authenticateToken, async (req, res) => {
     try {
       const [image] = await pool.query(
@@ -813,6 +864,7 @@
     }
   });
 
+  // Update a label
   app.put("/api/labels/:labelId", authenticateToken, async (req, res) => {
     try {
       const { label_name, label_color } = req.body;
@@ -840,12 +892,14 @@
     }
   });
 
+  // Delete a label
   app.delete("/api/labels/:labelId", authenticateToken, async (req, res) => {
     let connection;
     try {
       connection = await pool.getConnection();
       await connection.beginTransaction();
 
+      // Verify label belongs to user's project
       const [label] = await connection.query(
         `SELECT l.* FROM Label l
         JOIN Project p ON l.project_id = p.project_id
@@ -858,6 +912,7 @@
         return res.status(404).json({ error: "Label not found" });
       }
 
+      //delete annotations using this label
       await connection.query(
         `DELETE a FROM Annotation a
         JOIN ImageLabel il ON a.imagelabel_id = il.imagelabel_id
@@ -865,11 +920,13 @@
         [req.params.labelId]
       );
 
+      // delete image-label
       await connection.query(
         "DELETE FROM ImageLabel WHERE label_id = ?",
         [req.params.labelId]
       );
 
+      // delete the label
       await connection.query(
         "DELETE FROM Label WHERE label_id = ?",
         [req.params.labelId]
@@ -889,6 +946,7 @@
   app.delete('/api/annotations/:imageId/:x/:y', authenticateToken, async (req, res) => {
     const { imageId, x, y } = req.params;
     try {
+      // Find annotation by coordinates
       const [annotations] = await pool.query(`
         SELECT a.annotation_id FROM Annotation a
         JOIN ImageLabel il ON a.imagelabel_id = il.imagelabel_id
@@ -911,15 +969,18 @@
     }
   });
 
+  // Root route
   app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "login.html"));
   });
 
+  // Error handling middleware
   app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).json({ error: 'Something broke!' });
   });
-
+  
+  // Start server
   app.listen(port, () => {
     console.log(`Server running at http://localhost:${port}`);
   });
