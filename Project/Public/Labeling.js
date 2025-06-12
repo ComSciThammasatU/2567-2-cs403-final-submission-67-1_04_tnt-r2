@@ -47,10 +47,12 @@
     }
   });
 
+  // Get project ID from URL 
   function getProjectIdFromUrl() {
     return new URLSearchParams(window.location.search).get("id");
   }
 
+  //User Token
   function jwt_decode(token) {
     try {
       const base64Url = token.split(".")[1];
