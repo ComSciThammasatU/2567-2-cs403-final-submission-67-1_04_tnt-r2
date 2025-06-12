@@ -52,7 +52,7 @@
 
 2. [MySQL](https://dev.mysql.com/downloads/installer/).
    
-   เป็นตัวจัดการฐานข้อมูลหลักของโปรแกรม โดยผู้ใช้จำเป็นต้องดาวน์โหลด MySQL Server และ MySQL Workbecnh โดยในขั้นตอนนี้จะให้ผู้ทำการสร้าง Password เพื่อใช้ล็อกอินเข้า MySQL
+   เป็นตัวจัดการฐานข้อมูลหลักของโปรแกรม โดยผู้ใช้จำเป็นต้องดาวน์โหลด MySQL Server และ MySQL Workbecnh ซึ่งในขั้นตอนนี้จะให้ผู้ใช้ทำการสร้าง Password เพื่อใช้ล็อกอินเข้า MySQL
 
 3. [Visual Studio Code](https://code.visualstudio.com/).
    
