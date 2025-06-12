@@ -107,6 +107,8 @@
 
    4.6 package-lock.json
 
+   4.7 database.sql
+
 6. นำเข้าไฟล์ database.sql ใน mysql work bench ที่เชื่อมต่อกับโปรเจค
 
     ขั้นตอนการนำเข้าไฟล์
