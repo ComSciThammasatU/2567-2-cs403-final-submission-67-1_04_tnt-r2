@@ -9,6 +9,7 @@
     let selectedLabelId = null;
     let currentImageElement = null;
 
+    // DOM Elements
     const canvas = document.getElementById('imageCanvas');
     const ctx = canvas.getContext('2d');
     const imageList = document.getElementById('imageList');
@@ -20,6 +21,7 @@
         window.location.href = `Labeling.html?id=${currentProjectId}`;
     });
 
+    // show error messages
     function showErrorToUser(message) {
         const errorElement = document.getElementById('errorDisplay') || createErrorElement();
         errorElement.textContent = message;
@@ -47,6 +49,7 @@
         return errorElement;
     }
 
+    // Load project info
     async function loadProject(projectId) {
         try {
             const response = await fetch(`${serverUrl}/api/projects/${projectId}`, {
@@ -61,6 +64,7 @@
         }
     }
 
+    // Fetch and render images
     async function loadImages(projectId) {
         try {
             const response = await fetch(`${serverUrl}/api/images/${projectId}`, {
@@ -77,6 +81,7 @@
         }
     }
 
+    // Render image thumbnails
     function renderImageList(images) {
         imageList.innerHTML = '';
         images.forEach(image => {
@@ -95,6 +100,7 @@
         });
     }
 
+    // Load image onto canvas after click
     function loadImageToCanvas(fullImageUrl) {
         const img = new Image();
         img.crossOrigin = "anonymous";
@@ -116,6 +122,7 @@
         img.src = fullImageUrl;
     }
 
+    // Load labels for project
     async function loadLabels(projectId) {
         try {
             const token = localStorage.getItem('token');
@@ -139,12 +146,14 @@
     }
 
     document.addEventListener('DOMContentLoaded', async () => {
+        // Check if user is logged in
         const token = localStorage.getItem('token');
         if (!token) {
             window.location.href = 'login.html';
             return;
         }
 
+        // Get project ID from URL
         const urlParams = new URLSearchParams(window.location.search);
         currentProjectId = urlParams.get('id');
                     
@@ -155,13 +164,11 @@
         }
 
         try {
-            await loadProject(currentProjectId);
+            await loadProject(currentProjectId); // Load project data    
+            await loadImages(currentProjectId); // Load images                
+            await loadLabels(currentProjectId); // Load labels
                       
-            await loadImages(currentProjectId);
-                      
-            await loadLabels(currentProjectId);
-                      
-            setupCanvasEvents();
+            setupCanvasEvents(); // Setup canvas
         } catch (error) {
             console.error('Initialization error:', error);
             if (error.message.includes('401')) {
@@ -172,6 +179,7 @@
         }
     });
         
+    // Render label list
     function renderLabelList() {
         labelList.innerHTML = '';
         labels.forEach(label => {
@@ -181,6 +189,7 @@
             labelElement.style.backgroundColor = label.label_color || '#444';
             labelElement.dataset.id = label.label_id;
             
+            // Add double-click for editing
             labelElement.addEventListener('dblclick', () => {
                 showEditPopup(label.label_id);
             });
@@ -196,6 +205,7 @@
         });
     }
         
+    // Canvas event handlers
     function setupCanvasEvents() {
         canvas.removeEventListener('mousedown', startDrawing);
         canvas.removeEventListener('mousemove', draw);
@@ -238,6 +248,7 @@
     
         redrawCanvas();
     
+        // Draw current rectangle
         ctx.beginPath();
         ctx.rect(startX, startY, currentX - startX, currentY - startY);
         ctx.lineWidth = 2;
@@ -334,6 +345,7 @@
         }
     }        
 
+    // Save annotation to database
     async function loadAnnotations(imageId) {
         try {
             const response = await fetch(`${serverUrl}/api/images/${imageId}/annotations`, {
@@ -366,6 +378,7 @@
         }
     }
         
+    // Label creation popup
     function showPopup() {
         document.getElementById('labelName').value = '';
         document.getElementById('labelColor').value = '#00ff00';
@@ -414,6 +427,7 @@
           }
     }
 
+     // Edit label popup
     function showEditPopup(labelId) {
         const label = labels.find(l => l.label_id === labelId);
         if (!label) return;
@@ -428,6 +442,7 @@
         document.getElementById('editLabelPopup').style.display = 'none';
     }
         
+    //update label on side bar
     async function updateLabel() {
         const name = document.getElementById('editLabelName').value.trim();
         const color = document.getElementById('editLabelColor').value;
@@ -475,68 +490,6 @@
         }
     }
 
-    function showEditPopup(labelId) {
-        const label = labels.find(l => l.label_id === labelId);
-        if (!label) return;
-          
-        document.getElementById('editLabelName').value = label.label_name;
-        document.getElementById('editLabelColor').value = label.label_color || '#00ff00';
-        currentLabelId = labelId;
-        document.getElementById('editLabelPopup').style.display = 'block';
-    }
-      
-    function closeEditPopup() {
-        document.getElementById('editLabelPopup').style.display = 'none';
-    }
-      
-    async function updateLabel() {
-        const name = document.getElementById('editLabelName').value.trim();
-        const color = document.getElementById('editLabelColor').value;
-          
-        if (!name) {
-            alert('Please enter a label name');
-            return;
-        }
-          
-        try {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                alert('Please login first');
-                window.location.href = 'login.html';
-                return;
-            }
-              
-            const response = await fetch(`${serverUrl}/api/labels/${currentLabelId}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    label_name: name,
-                    label_color: color
-                })
-            });
-              
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.message || 'Failed to update label');
-            }
-              
-            const updatedLabel = await response.json();
-            const index = labels.findIndex(l => l.label_id === currentLabelId);
-            if (index !== -1) {
-                labels[index] = updatedLabel;
-            }
-            renderLabelList();
-            closeEditPopup();
-
-        } catch (error) {
-            console.error('Error updating label:', error);
-            alert(error.message || 'Failed to update label');
-        }
-    }
-
     function renderDrawnLabels() {
         drawnLabels.innerHTML = '';
     
@@ -563,7 +516,7 @@
         });
     }
 
-    
+    // delete annotation
     async function deleteAnnotation(index) {
         const confirmDelete = confirm('Are you sure you want to delete this annotation?');
         if (!confirmDelete) return;
@@ -617,6 +570,7 @@
         }
     });
 
+    //update process bar on label.js
     function updateProgressBar(total, labeled) {
         const progressContainer = document.getElementById('progressContainer');
         if (!progressContainer) return;

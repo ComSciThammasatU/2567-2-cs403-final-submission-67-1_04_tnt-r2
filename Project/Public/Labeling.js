@@ -2,6 +2,7 @@
   let currentProjectId = null;
   let currentUserId = null;
 
+  //get all element from html
   const elements = {
     projectName: document.getElementById("projectName"),
     backButton: document.getElementById("backButton"),
@@ -78,7 +79,7 @@
     button.classList.add("active");
   }
 
-  let allImages = []; 
+  let allImages = []; // store fetched image data with labeled status
 
   document.getElementById("allLabeling").addEventListener("click", () => {
       setActiveButton(elements.allLabeling);
@@ -108,6 +109,7 @@
     const activeButton = document.querySelector(".label-buttons button.active");
     const active = activeButton ? activeButton.id : "allLabeling";
 
+    // Get all image containers
     const containers = document.querySelectorAll(".image-container");
     
     containers.forEach(container => {
@@ -130,6 +132,7 @@
     });
   }
 
+  //load user info on rightside
   async function loadUserInfo() {
       try {
           const token = localStorage.getItem('token');
@@ -147,6 +150,7 @@
       }
   }
 
+  //load project data
   async function loadProjectData(projectId) {
     try {
       const res = await fetch(`${serverUrl}/api/projects/${projectId}`, {
@@ -158,6 +162,7 @@
       const project = await res.json();
       elements.projectName.textContent = project.project_name;
 
+      // Load user data
       const userRes = await fetch(`${serverUrl}/api/user`, {
         headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
       });
@@ -174,7 +179,7 @@
     }
   }
 
-
+  //load image 
   async function loadImages(projectId) {
     try {
       const res = await fetch(`${serverUrl}/api/images/${projectId}`, {
@@ -184,7 +189,7 @@
       const container = elements.imagePreview;
       container.innerHTML = "";
 
-      allImages = images; 
+      allImages = images; // update global
 
       let labeledCount = 0;
       images.forEach((img) => {
@@ -209,6 +214,7 @@
     }
   }
 
+  // make botton foe elements
   window.addEventListener("DOMContentLoaded", async () => {
     const token = localStorage.getItem("token");
     if (!token) return (window.location.href = "login.html");

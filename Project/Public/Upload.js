@@ -71,6 +71,7 @@
     }, 3000);
   }
 
+  // handle upload botton 
   async function handleUploadFormSubmit(event) {
     event.preventDefault();
     console.log("Upload initiated");
@@ -132,6 +133,7 @@
     }
   }
 
+  // load image
   async function loadImages(projectId) {
     try {
       const response = await fetch(`${serverUrl}/api/images/${projectId}`, {
@@ -167,6 +169,7 @@
     }
   }
 
+  // delete image
   async function deleteImage(imageId) {
     if (!confirm("Are you sure you want to delete this image?")) return;
 
@@ -185,6 +188,7 @@
     }
   }
 
+  //make image file automatic upload when click open
   document.addEventListener("DOMContentLoaded", () => {
     const uploadForm = document.getElementById("uploadForm");
     const projectId = getProjectIdFromUrl();
@@ -198,8 +202,8 @@
       document.getElementById("uploadForm").dispatchEvent(new Event("submit", { cancelable: true }));
     }
   });
-
-
+  
+  // if can't find project id tell user
     if (projectId) {
       fetch(`${serverUrl}/api/projects/${projectId}`, {
         headers: { 'Authorization': `Bearer ${localStorage.getItem("token")}` }

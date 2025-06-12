@@ -43,7 +43,7 @@
     });
 
 
-    // Get project ID from URL query parameter
+    // Get project ID from URL 
     function getProjectIdFromUrl() {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get('id');
@@ -54,7 +54,7 @@
         document.getElementById("exportModal").style.display = "block";
     });
 
-
+    // load project data
     async function loadProjectData(projectId) {
     try {
         const res = await fetch(`${serverUrl}/api/projects/${projectId}`, {
@@ -81,6 +81,7 @@
     }
     }
 
+    //load image
     async function loadImages(projectId) {
     try {
         const response = await fetch(`${serverUrl}/api/images/${projectId}`, {
@@ -140,6 +141,7 @@
         document.getElementById("exportModal").style.display = "none";
     }
 
+    //export all image as .zip
     async function exportRaw() {
         const projectId = getProjectIdFromUrl();
         try {
@@ -161,6 +163,7 @@
         }
     }
 
+    //export COCO file
     async function exportCoco() {
         const projectId = getProjectIdFromUrl();
         try {

@@ -7,17 +7,24 @@ let selectedType = "Object Detection";
         const accountBtn = document.getElementById("accountBtn");
         const accountPopup = document.getElementById("accountPopup");
 
+        // click event to switch content
         sidebarLinks.forEach(link => {
             link.addEventListener("click", function (event) {
                 event.preventDefault();
+
+                // Remove active class from all sidebar links
                 sidebarLinks.forEach(item => item.classList.remove("active"));
                 this.classList.add("active");
+
+                // Hide all sections
                 containers.forEach(container => container.classList.remove("active"));
+                // Show the selected section
                 const targetId = this.getAttribute("data-target");
                 document.getElementById(targetId).classList.add("active");
             });
     });
 
+    // Toggle account popup
     accountBtn.addEventListener("click", function (event) {
         event.stopPropagation();
         accountPopup.style.display = (accountPopup.style.display === "block") ? "none" : "block";
@@ -31,6 +38,7 @@ let selectedType = "Object Detection";
     });
 
     document.addEventListener("DOMContentLoaded", function () {
+    // Sign out from popup (top-right)
     const signOutBtn = document.getElementById("signOutBtn");
     if (signOutBtn) {
         signOutBtn.addEventListener("click", function (e) {
@@ -39,6 +47,7 @@ let selectedType = "Object Detection";
         });
     }
 
+    // Sign out from account settings section
     document.querySelectorAll(".signout-btn").forEach(btn => {
         btn.addEventListener("click", logout);
     });
@@ -75,6 +84,7 @@ let selectedType = "Object Detection";
         loadUserInfo()
         loadProjects();
         
+        // Better event delegation for delete buttons
         document.getElementById("projectContainer").addEventListener("click", function(event) {
             if (event.target.classList.contains("delete-btn")) {
                 const projectId = event.target.getAttribute("data-id");
@@ -96,6 +106,7 @@ let selectedType = "Object Detection";
             
             const user = await response.json();
             
+            // Update account link in sidebar
             const accountLink = document.getElementById('accountBtn');
             if (accountLink) {
             const iconSpan = accountLink.querySelector('.icon');
@@ -105,11 +116,12 @@ let selectedType = "Object Detection";
             if (nameSpan) nameSpan.textContent = user.name;
             }
 
+            // Update account popup info
             const accountPopup = document.getElementById('accountPopup');
             accountPopup.querySelector('strong').textContent = user.name;
             accountPopup.querySelector('p').textContent = user.email;
             
-            
+            // Update account settings page
             const profileCard = document.querySelector('.profile-card');
             if (profileCard) {
                 profileCard.querySelector('.profile-pic').textContent = user.name.charAt(0);
@@ -121,6 +133,7 @@ let selectedType = "Object Detection";
         }
     }
 
+    // Load projects from the server
     async function loadProjects() {
         const token = localStorage.getItem("token");
 
@@ -209,6 +222,7 @@ let selectedType = "Object Detection";
         }
     }
 
+    // Create a new project
     async function createProject() {
         const projectName = document.getElementById("projectName").value.trim();
         const tagInput = document.getElementById("searchTag");
@@ -228,7 +242,7 @@ let selectedType = "Object Detection";
             project_name: projectName,
             tag: tag,
             type : selectedType,
-            labeled_status: 0 
+            labeled_status: 0 // set not label to defalut
         };
 
         try {
@@ -290,6 +304,7 @@ let selectedType = "Object Detection";
         }
     }
 
+    // Modal functions
     function openModal() {
         document.getElementById("projectModal").style.display = "flex";
     }
@@ -298,6 +313,7 @@ let selectedType = "Object Detection";
         document.getElementById("projectModal").style.display = "none";
     }
 
+    // Filter projects
     function filterProjects() {
         const nameQuery = document.getElementById("searchBox").value.toLowerCase();
         const tagQuery = document.getElementById("tagSearchBox").value.toLowerCase();
@@ -312,7 +328,8 @@ let selectedType = "Object Detection";
             card.style.display = (matchesName && matchesTag) ? "block" : "none";
         });
     }
-
+    
+    // Select project type (for a future if can write segmentation)
     /*
     function selectOption(element, type) {
         document.querySelectorAll(".option").forEach(option => 
