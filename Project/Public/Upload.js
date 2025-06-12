@@ -24,6 +24,7 @@
     }
   });
 
+  // Get project ID from URL 
   function getProjectIdFromUrl() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get("id");
