@@ -101,7 +101,7 @@
    - 1.2.17 ระบบจะแสดงหน้า  "Product Configuration" ซึ่งแสดงว่าการกำหนดค่าเสร็จสมบูรณ์แล้ว ให้คงค่าดีฟอลต์ไว้ แล้วคลิก "Next" และ "Finish" เพื่อเสร็จสิ้นการติดตั้งแพ็กเกจ MySQL
    - 1.2.18 ระบบจะแสดงหน้า "Installation Complete" ซึ่งแสดงว่าการติดตั้งเสร็จสมบูรณ์ ให้คลิกปุ่ม "Finish"
 
-    ** 1.3 การติดตั้ง VScode **
+    **1.3 การติดตั้ง VScode**
 
    จากเว็บไซต์ [https://code.visualstudio.com/](https://code.visualstudio.com/Download)
    
