@@ -62,7 +62,9 @@
 
 1. ผู้ใช้จำเป็นจะต้องติดตั้ง node.js, Mysql, และ Visual Studio Code
 
-   **1.1 การติดตั้ง node.js** จากเว็บไซต์ https://nodejs.org/en
+   **1.1 การติดตั้ง node.js**
+
+   จากเว็บไซต์ https://nodejs.org/en
 
    - 1.1.1 โดยผู้ใช้กด Download Node.js (LTS) เพื่อดาวโหลดและดำเนินการ install
    - 1.1.2 กดยอมรับ term of service
@@ -72,7 +74,9 @@
    - 1.1.6 จากนั้นจึงสามารถกด install ได้
    - 1.1.7 ระบบจะใช้เวลา install และเมื่อสำเร็จจะขึ้นหน้าที่สามารถกดเสร็จสิ้นได้และระบบจะอัพโหลดตัวเองขึ้นในระบบ terminal และจะขออนุญาตเข้าถึงระบบคอมพิวเตอร์ ขอให้ผู้ใช้กดตกลงเมื่อระบบรันในterminalเสร็จสิ้นจะมีข้อความ press any key to continue.. ให้ผู้ใช้กดปุ่มใดก็ได้ระบบจะเริ่มดำเนินการ install ต่อจนเสร็จสิ้น
 
-   ** 1.2 การติดตั้ง MySQL** จากเว็บไซต์ https://dev.mysql.com/downloads/installer/ แนะนำเป็นเวอร์ชั่น 8.0.42
+   **1.2 การติดตั้ง MySQL**
+
+   จากเว็บไซต์ https://dev.mysql.com/downloads/installer/ แนะนำเป็นเวอร์ชั่น 8.0.42
 
    - 1.2.1 ผู้ใช้เลือกกดดาวโหลด Windows (x86, 32-bit), MSI Installer
    - 1.2.2 ระบบจะขึ้นให้ login สามารถเข้าสู่ระบบหรือไม่ก็ได้ หากไม่ต้องการให้กด  No thanks, just start my download. ระบบจะเริ่มการดาวโหลดทันที โดยจะขออนุญาตเข้าถึงระบบคอมพิวเตอร์ ขอให้ผู้ใช้กดตกลง
@@ -97,7 +101,9 @@
    - 1.2.17 ระบบจะแสดงหน้า  "Product Configuration" ซึ่งแสดงว่าการกำหนดค่าเสร็จสมบูรณ์แล้ว ให้คงค่าดีฟอลต์ไว้ แล้วคลิก "Next" และ "Finish" เพื่อเสร็จสิ้นการติดตั้งแพ็กเกจ MySQL
    - 1.2.18 ระบบจะแสดงหน้า "Installation Complete" ซึ่งแสดงว่าการติดตั้งเสร็จสมบูรณ์ ให้คลิกปุ่ม "Finish"
 
-    ** 1.3 การติดตั้ง VScode ** จากเว็บไซต์ [https://code.visualstudio.com/](https://code.visualstudio.com/Download)
+    ** 1.3 การติดตั้ง VScode **
+
+   จากเว็บไซต์ [https://code.visualstudio.com/](https://code.visualstudio.com/Download)
    
    - 1.3.1 ผู้ใช้เลือกกด "Download" และเลือกระบบปฏิบัติการ
    - 1.3.2 ทำการ install .exe file
