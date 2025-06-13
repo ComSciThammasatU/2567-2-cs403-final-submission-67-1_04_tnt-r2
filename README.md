@@ -98,14 +98,13 @@
    - 1.2.18 ระบบจะแสดงหน้า "Installation Complete" ซึ่งแสดงว่าการติดตั้งเสร็จสมบูรณ์ ให้คลิกปุ่ม "Finish"
 
 2. สร้าง folder สำหรับการใส่โปรเจค
+ 
+   ผู้ใช้จำเป็นต้องใช้คำสั่ง cd เพื่อไปยังโฟลเดอร์ที่มีโค้ด (ในที่นี้คือ sourececode) และจึง ใช้คำสั่ง npm init -y เพื่อเรียกใช้ library ของ node.js
    
    ```
-   mkdir (Whatever you want to name your folder)
    cd (your folder's name)
    npm init -y
    ```
-
-   ผู้ใช้จำเป็นต้องใช้คำสั่ง cd เพื่อไปยังโฟลเดอร์ที่มีโค้ด (ในที่นี้คือ sourececode) และจึง ใช้คำสั่ง npm init -y เพื่อเรียกใช้ library ของ node.js
 
    
 3. จากนั้นจึงทำการ install library ที่จำเป็น
