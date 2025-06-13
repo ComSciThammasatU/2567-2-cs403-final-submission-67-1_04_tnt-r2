@@ -104,7 +104,7 @@
 
    4.7 database.sql
 
-6. นำเข้าไฟล์ database.sql ใน MySQL Workbench ที่เชื่อมต่อกับโปรเจค
+5. นำเข้าไฟล์ database.sql ใน MySQL Workbench ที่เชื่อมต่อกับโปรเจค
 
     ขั้นตอนการนำเข้าไฟล์
    
