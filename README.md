@@ -110,7 +110,7 @@
    
       5.1 เปิด MySQL Workbench
    
-      5.2 เลือก Local instance MySQL80
+      5.2 เลือก connection ของ MySQL ที่ต้องการใช้งาน
    
       5.3 ใส่ Root Password ที่ได้ตั้งเอาไว้ในขั้นตอนที่ติดตั้ง MySQL
    
